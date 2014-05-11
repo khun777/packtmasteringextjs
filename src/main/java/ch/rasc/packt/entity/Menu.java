@@ -1,5 +1,6 @@
 package ch.rasc.packt.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,8 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import ch.rasc.edsutil.entity.AbstractPersistable;
-
-import com.google.common.collect.Sets;
 
 @Entity
 public class Menu extends AbstractPersistable {
@@ -28,7 +27,7 @@ public class Menu extends AbstractPersistable {
 	private Set<Permission> permissions;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "parent", orphanRemoval = true)
-	private Set<Menu> children = Sets.newHashSet();
+	private Set<Menu> children = new HashSet<>();
 
 	public String getMenuText() {
 		return menuText;

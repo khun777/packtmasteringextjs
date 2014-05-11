@@ -3,6 +3,7 @@ package ch.rasc.packt.web;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -19,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ch.ralscha.extdirectspring.util.ExtDirectSpringUtil;
 import ch.ralscha.extdirectspring.util.JsonHandler;
-
-import com.google.common.collect.Maps;
 
 @Controller
 public class I18nMessageController implements InitializingBean {
@@ -53,7 +52,7 @@ public class I18nMessageController implements InitializingBean {
 	private byte[] buildResponse(Locale locale) {
 		ResourceBundle rb = ResourceBundle.getBundle("messages", locale);
 
-		Map<String, String> messages = Maps.newHashMap();
+		Map<String, String> messages = new HashMap<>();
 		Enumeration<String> e = rb.getKeys();
 		while (e.hasMoreElements()) {
 			String key = e.nextElement();

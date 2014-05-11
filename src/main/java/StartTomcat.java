@@ -3,9 +3,8 @@ import ch.rasc.embeddedtc.EmbeddedTomcat;
 public class StartTomcat {
 	public static void main(String[] args) throws Exception {
 		/*
-		 * To activate development mode from tomcat context file add this
-		 * statement: <Environment name="spring.profiles.active"
-		 * value="development" type="java.lang.String" override="false"/>
+		 * To activate development mode from tomcat context file add this statement: <Environment
+		 * name="spring.profiles.active" value="development" type="java.lang.String" override="false"/>
 		 */
 
 		// Comment out the following line to activate production profile
