@@ -11,7 +11,7 @@
 	</prerequisites>
 
 	<properties>
-		<spring.security.version>3.2.3.RELEASE</spring.security.version>
+		<spring.security.version>3.2.4.RELEASE</spring.security.version>
 
 		<hibernate.version>4.3.5.Final</hibernate.version>
 		<querydsl.version>3.3.3</querydsl.version>
@@ -334,7 +334,7 @@
 			<groupId>resources</groupId>
 			<artifactId>siesta-lite</artifactId>
 			<version>2.0.5</version>
-			<scope>test</scope>
+			<!-- <scope>test</scope> -->
 		</dependency>
 
 		<dependency>
