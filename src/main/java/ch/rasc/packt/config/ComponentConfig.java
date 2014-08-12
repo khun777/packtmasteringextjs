@@ -8,8 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 @Configuration
-@ComponentScan(basePackages = { "ch.ralscha.extdirectspring", "ch.rasc.packt.config", "ch.rasc.packt.security",
-		"ch.rasc.packt.service", "ch.rasc.packt.web" })
+@ComponentScan(basePackages = { "ch.ralscha.extdirectspring", "ch.rasc.packt.config",
+		"ch.rasc.packt.security", "ch.rasc.packt.service", "ch.rasc.packt.web" })
 @PropertySource("classpath:/version.properties")
 public class ComponentConfig {
 

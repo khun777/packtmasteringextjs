@@ -7,7 +7,8 @@ import ch.rasc.extclassgenerator.ModelField;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Model(value = "Packt.model.mail.MailMessage", readMethod = "mailService.read", updateMethod = "mailService.update")
+@Model(value = "Packt.model.mail.MailMessage", readMethod = "mailService.read",
+		updateMethod = "mailService.update")
 public class MailMessage {
 
 	private boolean importance;

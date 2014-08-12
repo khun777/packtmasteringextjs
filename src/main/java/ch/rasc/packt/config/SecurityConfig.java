@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			    .cacheControl()
 			    .httpStrictTransportSecurity()
 			    .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsMode.SAMEORIGIN))
-			    .and()		
+			    .and()
 			  .authorizeRequests()
 			    .anyRequest().permitAll()
 			    .and()

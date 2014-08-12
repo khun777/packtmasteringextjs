@@ -4,10 +4,7 @@ Ext.define("Packt.model.security.Group",
   fields : [ {
     name : "name",
     type : "string"
-  }, {
-    name : "permissions",
-    type : "auto"
-  }, {
+  }, "permissions", {
     name : "id",
     type : "int",
     useNull : true,

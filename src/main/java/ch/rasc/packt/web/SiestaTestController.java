@@ -47,8 +47,8 @@ public class SiestaTestController {
 
 		sb.append("    preload     : [").append("\n");
 
-		WebResourceProcessor processor = new WebResourceProcessor(session.getServletContext(),
-				!environment.acceptsProfiles("development"));
+		WebResourceProcessor processor = new WebResourceProcessor(
+				session.getServletContext(), !environment.acceptsProfiles("development"));
 		processor.setResourceServletPath("/resources/");
 		processor.ignoreJsResourceFromReordering("/app/model/menu/Item.js");
 		List<String> resources = processor.getJsAndCssResources();
@@ -57,7 +57,8 @@ public class SiestaTestController {
 		for (String resource : resources) {
 			if (!first) {
 				sb.append(",\n");
-			} else {
+			}
+			else {
 				first = false;
 			}
 			sb.append("        '").append(resource).append("'");
@@ -67,7 +68,8 @@ public class SiestaTestController {
 		sb.append("});").append("\n");
 
 		first = true;
-		Set<String> testResourcesSet = session.getServletContext().getResourcePaths("/test/");
+		Set<String> testResourcesSet = session.getServletContext().getResourcePaths(
+				"/test/");
 		if (testResourcesSet != null) {
 
 			List<String> testResourcesList = new ArrayList<>(testResourcesSet);
@@ -77,7 +79,8 @@ public class SiestaTestController {
 			for (String testResource : testResourcesList) {
 				if (!first) {
 					sb.append(",\n");
-				} else {
+				}
+				else {
 					first = false;
 				}
 				sb.append("    '").append(testResource.substring(1)).append("'");

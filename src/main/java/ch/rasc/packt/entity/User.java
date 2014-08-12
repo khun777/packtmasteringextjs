@@ -18,7 +18,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "AppUser")
-@Model(value = "Packt.model.security.User", disablePagingParameters = true, paging = true, createMethod = "userService.create", readMethod = "userService.readUser", updateMethod = "userService.update", destroyMethod = "userService.destroy")
+@Model(value = "Packt.model.security.User", disablePagingParameters = true,
+		paging = true, createMethod = "userService.create",
+		readMethod = "userService.readUser", updateMethod = "userService.update",
+		destroyMethod = "userService.destroy")
 public class User extends AbstractPersistable {
 
 	private String name;
@@ -104,7 +107,8 @@ public class User extends AbstractPersistable {
 	private void populate() {
 		if (appGroup != null) {
 			appGroupId = appGroup.getId();
-		} else {
+		}
+		else {
 			appGroupId = null;
 		}
 	}

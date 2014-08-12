@@ -41,11 +41,13 @@ public class ReportService {
 		query.innerJoin(QFilmCategory.filmCategory.category, QCategory.category);
 		query.groupBy(QCategory.category.name);
 		query.orderBy(QPayment.payment.amount.sum().desc());
-		List<Tuple> result = query.list(QCategory.category.name, QPayment.payment.amount.sum());
+		List<Tuple> result = query.list(QCategory.category.name,
+				QPayment.payment.amount.sum());
 
 		ImmutableList.Builder<Map<String, Object>> r = ImmutableList.builder();
 		for (Tuple tuple : result) {
-			r.add(ImmutableMap.<String, Object> of("category", tuple.get(QCategory.category.name), "totalSales",
+			r.add(ImmutableMap.<String, Object> of("category",
+					tuple.get(QCategory.category.name), "totalSales",
 					tuple.get(QPayment.payment.amount.sum())));
 		}
 

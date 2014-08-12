@@ -26,7 +26,8 @@ public class FilmService extends BaseCRUDService<Film> {
 
 			entity.getFilmActor().clear();
 			entity.getFilmCategory().clear();
-		} else {
+		}
+		else {
 			entity.setFilmActor(new HashSet<FilmActor>());
 			entity.setFilmCategory(new HashSet<FilmCategory>());
 		}
@@ -44,21 +45,26 @@ public class FilmService extends BaseCRUDService<Film> {
 			for (Long categoryId : entity.getFilmCategoryIds()) {
 				FilmCategory filmCategory = new FilmCategory();
 				filmCategory.setFilm(entity);
-				filmCategory.setCategory(entityManager.getReference(Category.class, categoryId));
+				filmCategory.setCategory(entityManager.getReference(Category.class,
+						categoryId));
 				filmCategory.setLastUpdate(new Date());
 				entity.getFilmCategory().add(filmCategory);
 			}
 		}
 
 		if (entity.getLanguageId() != null) {
-			entity.setLanguage(entityManager.getReference(Language.class, entity.getLanguageId()));
-		} else {
+			entity.setLanguage(entityManager.getReference(Language.class,
+					entity.getLanguageId()));
+		}
+		else {
 			entity.setLanguage(null);
 		}
 
 		if (entity.getOriginalLanguageId() != null) {
-			entity.setOriginalLanguage(entityManager.getReference(Language.class, entity.getOriginalLanguageId()));
-		} else {
+			entity.setOriginalLanguage(entityManager.getReference(Language.class,
+					entity.getOriginalLanguageId()));
+		}
+		else {
 			entity.setOriginalLanguage(null);
 		}
 

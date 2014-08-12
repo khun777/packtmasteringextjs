@@ -11,8 +11,10 @@ public class CityService extends BaseCRUDService<City> {
 	@Override
 	protected void preModify(City entity) {
 		if (entity.getCountryId() != null) {
-			entity.setCountry(entityManager.getReference(Country.class, entity.getCountryId()));
-		} else {
+			entity.setCountry(entityManager.getReference(Country.class,
+					entity.getCountryId()));
+		}
+		else {
 			entity.setCountry(null);
 		}
 	}

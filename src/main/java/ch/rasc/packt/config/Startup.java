@@ -147,9 +147,10 @@ public class Startup implements ApplicationListener<ContextRefreshedEvent> {
 			mailMenu.setClassName("mailcontainer");
 			entityManager.persist(mailMenu);
 
-			for (Menu menu : Arrays.asList(cmsMenu, menuFilms, adminMenu, menu11, menu12, staticDataMenu,
-					staticMenuActor, staticMenuCategory, staticMenuLanguage, staticMenuCity, staticMenuCountry,
-					reportsMenu, menuSales, mailClientMenu, mailMenu)) {
+			for (Menu menu : Arrays.asList(cmsMenu, menuFilms, adminMenu, menu11, menu12,
+					staticDataMenu, staticMenuActor, staticMenuCategory,
+					staticMenuLanguage, staticMenuCity, staticMenuCountry, reportsMenu,
+					menuSales, mailClientMenu, mailMenu)) {
 				Permission permission = new Permission();
 				permission.setAppGroup(group);
 				permission.setMenu(menu);

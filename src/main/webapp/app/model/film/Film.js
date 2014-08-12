@@ -48,13 +48,7 @@ Ext.define("Packt.model.film.Film",
   }, {
     name : "specialFeatures",
     type : "string"
-  }, {
-    name : "filmCategoryIds",
-    type : "auto"
-  }, {
-    name : "filmActorIds",
-    type : "auto"
-  }, {
+  }, "filmCategoryIds", "filmActorIds", {
     name : "lastUpdate",
     type : "date",
     dateFormat : "c"

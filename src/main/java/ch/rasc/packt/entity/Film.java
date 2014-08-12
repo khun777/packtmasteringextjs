@@ -19,7 +19,9 @@ import ch.rasc.extclassgenerator.ModelField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Model(value = "Packt.model.film.Film", paging = true, createMethod = "filmService.create", readMethod = "filmService.read", updateMethod = "filmService.update", destroyMethod = "filmService.destroy")
+@Model(value = "Packt.model.film.Film", paging = true,
+		createMethod = "filmService.create", readMethod = "filmService.read",
+		updateMethod = "filmService.update", destroyMethod = "filmService.destroy")
 public class Film extends SakilaBaseEntity {
 
 	private String title;
@@ -221,13 +223,15 @@ public class Film extends SakilaBaseEntity {
 	private void populate() {
 		if (language != null) {
 			languageId = language.getId();
-		} else {
+		}
+		else {
 			languageId = null;
 		}
 
 		if (originalLanguage != null) {
 			originalLanguageId = originalLanguage.getId();
-		} else {
+		}
+		else {
 			originalLanguageId = null;
 		}
 	}

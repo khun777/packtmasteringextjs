@@ -43,8 +43,10 @@ public class UserService extends BaseCRUDService<User> {
 		}
 
 		if (entity.getAppGroupId() != null) {
-			entity.setAppGroup(entityManager.getReference(AppGroup.class, entity.getAppGroupId()));
-		} else {
+			entity.setAppGroup(entityManager.getReference(AppGroup.class,
+					entity.getAppGroupId()));
+		}
+		else {
 			entity.setAppGroup(null);
 		}
 	}

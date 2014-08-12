@@ -11,7 +11,9 @@ import ch.rasc.extclassgenerator.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Model(value = "Packt.model.staticData.Actor", paging = true, createMethod = "actorService.create", readMethod = "actorService.readActor", updateMethod = "actorService.update", destroyMethod = "actorService.destroy")
+@Model(value = "Packt.model.staticData.Actor", paging = true,
+		createMethod = "actorService.create", readMethod = "actorService.readActor",
+		updateMethod = "actorService.update", destroyMethod = "actorService.destroy")
 public class Actor extends SakilaBaseEntity {
 
 	private String firstName;

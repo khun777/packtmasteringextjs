@@ -34,7 +34,8 @@ public class MailService {
 	public void init() throws IOException {
 		MailMessage message = new MailMessage();
 		message.setAttachment(true);
-		message.setContent(Resources.toString(Resources.getResource("mail/1"), StandardCharsets.UTF_8));
+		message.setContent(Resources.toString(Resources.getResource("mail/1"),
+				StandardCharsets.UTF_8));
 		message.setFlag(true);
 		message.setFolder("inbox");
 		message.setFrom("senchainsights@swarmonline.com");
@@ -47,7 +48,8 @@ public class MailService {
 
 		message = new MailMessage();
 		message.setAttachment(false);
-		message.setContent(Resources.toString(Resources.getResource("mail/2"), StandardCharsets.UTF_8));
+		message.setContent(Resources.toString(Resources.getResource("mail/2"),
+				StandardCharsets.UTF_8));
 		message.setFlag(false);
 		message.setFolder("inbox");
 		message.setFrom("noreply@github.com");
@@ -60,7 +62,8 @@ public class MailService {
 
 		message = new MailMessage();
 		message.setAttachment(false);
-		message.setContent(Resources.toString(Resources.getResource("mail/3"), StandardCharsets.UTF_8));
+		message.setContent(Resources.toString(Resources.getResource("mail/3"),
+				StandardCharsets.UTF_8));
 		message.setFlag(true);
 		message.setFolder("inbox");
 		message.setFrom("news@sencha.com");
@@ -73,7 +76,8 @@ public class MailService {
 
 		message = new MailMessage();
 		message.setAttachment(false);
-		message.setContent(Resources.toString(Resources.getResource("mail/4"), StandardCharsets.UTF_8));
+		message.setContent(Resources.toString(Resources.getResource("mail/4"),
+				StandardCharsets.UTF_8));
 		message.setFlag(false);
 		message.setFolder("inbox");
 		message.setFrom("senchainsights@swarmonline.com");
@@ -91,14 +95,17 @@ public class MailService {
 
 		ImmutableList.Builder<Map<String, Object>> builder = ImmutableList.builder();
 
-		builder.add(ImmutableMap.<String, Object> of("text", "Inbox", "iconCls", "folder-inbox", "expanded", true,
-				"leaf", true));
+		builder.add(ImmutableMap.<String, Object> of("text", "Inbox", "iconCls",
+				"folder-inbox", "expanded", Boolean.TRUE, "leaf", Boolean.TRUE));
 
-		builder.add(ImmutableMap.<String, Object> of("text", "Sent", "iconCls", "folder-sent", "leaf", true));
+		builder.add(ImmutableMap.<String, Object> of("text", "Sent", "iconCls",
+				"folder-sent", "leaf", Boolean.TRUE));
 
-		builder.add(ImmutableMap.<String, Object> of("text", "Draft", "iconCls", "folder-drafts", "leaf", true));
+		builder.add(ImmutableMap.<String, Object> of("text", "Draft", "iconCls",
+				"folder-drafts", "leaf", Boolean.TRUE));
 
-		builder.add(ImmutableMap.<String, Object> of("text", "Trash", "iconCls", "folder-trash", "leaf", true));
+		builder.add(ImmutableMap.<String, Object> of("text", "Trash", "iconCls",
+				"folder-trash", "leaf", Boolean.TRUE));
 		return builder.build();
 	}
 

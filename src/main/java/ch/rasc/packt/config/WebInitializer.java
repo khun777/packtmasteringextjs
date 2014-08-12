@@ -21,16 +21,19 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		String profile = System.getProperty("spring.profiles.active");
 		if (profile == null) {
 			try {
-				profile = (String) JndiLocatorDelegate.createDefaultResourceRefLocator().lookup(
-						"spring.profiles.active");
-			} catch (NameNotFoundException ne) {
+				profile = (String) JndiLocatorDelegate.createDefaultResourceRefLocator()
+						.lookup("spring.profiles.active");
+			}
+			catch (NameNotFoundException ne) {
 				// do nothing
-			} catch (NamingException e) {
+			}
+			catch (NamingException e) {
 				throw new ServletException(e);
 			}
 		}
 
-		WebResourceProcessor processor = new WebResourceProcessor(servletContext, !"development".equals(profile));
+		WebResourceProcessor processor = new WebResourceProcessor(servletContext,
+				!"development".equals(profile));
 		processor.setResourceServletPath("/resources/");
 		processor.ignoreJsResourceFromReordering("/app/model/menu/Item.js");
 		processor.process();
@@ -40,15 +43,16 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");
 		characterEncodingFilter.setForceEncoding(false);
-		servletContext.addFilter("characterEncodingFilter", characterEncodingFilter).addMappingForUrlPatterns(null,
-				false, "/*");
+		servletContext.addFilter("characterEncodingFilter", characterEncodingFilter)
+				.addMappingForUrlPatterns(null, false, "/*");
 
 		super.onStartup(servletContext);
 	}
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { ComponentConfig.class, DataConfig.class, SecurityConfig.class, WebConfig.class };
+		return new Class[] { ComponentConfig.class, DataConfig.class,
+				SecurityConfig.class, WebConfig.class };
 	}
 
 	@Override

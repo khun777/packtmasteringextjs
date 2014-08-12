@@ -32,12 +32,13 @@ public class MenuService {
 	@PreAuthorize("isAuthenticated()")
 	@Transactional(readOnly = true)
 	@ExtDirectMethod(value = ExtDirectMethodType.TREE_LOAD)
-	public List<Root> loadPermission(@RequestParam(required = false) Long group, @SuppressWarnings("unused") String node) {
+	public List<Root> loadPermission(@RequestParam(required = false) Long group,
+			@SuppressWarnings("unused") String node) {
 
 		ImmutableList.Builder<Root> builder = ImmutableList.builder();
 
-		List<Menu> rootMenus = new JPAQuery(entityManager).from(QMenu.menu).where(QMenu.menu.parent.isNull())
-				.list(QMenu.menu);
+		List<Menu> rootMenus = new JPAQuery(entityManager).from(QMenu.menu)
+				.where(QMenu.menu.parent.isNull()).list(QMenu.menu);
 
 		for (Menu root : rootMenus) {
 
@@ -47,19 +48,21 @@ public class MenuService {
 			rootObj.setText(root.getMenuText());
 
 			if (group != null) {
-				rootObj.setChecked(new JPAQuery(entityManager).from(QPermission.permission)
-						.where(QPermission.permission.appGroup.id.eq(group).and(QPermission.permission.menu.eq(root)))
-						.exists());
-			} else {
-				rootObj.setChecked(false);
+				rootObj.setChecked(new JPAQuery(entityManager)
+						.from(QPermission.permission)
+						.where(QPermission.permission.appGroup.id.eq(group).and(
+								QPermission.permission.menu.eq(root))).exists());
+			}
+			else {
+				rootObj.setChecked(Boolean.FALSE);
 			}
 			builder.add(rootObj);
 
-			List<Menu> childMenus = new JPAQuery(entityManager).from(QMenu.menu).where(QMenu.menu.parent.eq(root))
-					.list(QMenu.menu);
+			List<Menu> childMenus = new JPAQuery(entityManager).from(QMenu.menu)
+					.where(QMenu.menu.parent.eq(root)).list(QMenu.menu);
 
 			if (!childMenus.isEmpty()) {
-				rootObj.setExpanded(true);
+				rootObj.setExpanded(Boolean.TRUE);
 
 				ImmutableList.Builder<Item> itemBuilder = ImmutableList.builder();
 				for (Menu child : childMenus) {
@@ -75,15 +78,17 @@ public class MenuService {
 								.from(QPermission.permission)
 								.where(QPermission.permission.appGroup.id.eq(group).and(
 										QPermission.permission.menu.eq(child))).exists());
-					} else {
-						item.setChecked(false);
+					}
+					else {
+						item.setChecked(Boolean.FALSE);
 					}
 					itemBuilder.add(item);
 				}
 
 				rootObj.setChildren(itemBuilder.build());
 
-			} else {
+			}
+			else {
 				rootObj.setLeaf(true);
 			}
 		}
@@ -102,17 +107,20 @@ public class MenuService {
 		if (user != null) {
 
 			if (user.getAppGroup() != null) {
-				List<Menu> rootMenus = new JPAQuery(entityManager).from(QMenu.menu)
+				List<Menu> rootMenus = new JPAQuery(entityManager)
+						.from(QMenu.menu)
 						.innerJoin(QMenu.menu.permissions, QPermission.permission)
-						.where(QMenu.menu.parent.isNull().and(QPermission.permission.appGroup.in(user.getAppGroup())))
+						.where(QMenu.menu.parent.isNull().and(
+								QPermission.permission.appGroup.in(user.getAppGroup())))
 						.list(QMenu.menu);
 
 				for (Menu root : rootMenus) {
 					List<Menu> childMenus = new JPAQuery(entityManager)
 							.from(QMenu.menu)
 							.innerJoin(QMenu.menu.permissions, QPermission.permission)
-							.where(QMenu.menu.parent.eq(root).and(
-									QPermission.permission.appGroup.in(user.getAppGroup()))).list(QMenu.menu);
+							.where(QMenu.menu.parent.eq(root)
+									.and(QPermission.permission.appGroup.in(user
+											.getAppGroup()))).list(QMenu.menu);
 					if (!childMenus.isEmpty()) {
 						Root rootObj = new Root();
 						rootObj.setIconCls(root.getIconCls());

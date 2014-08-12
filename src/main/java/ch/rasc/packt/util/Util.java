@@ -22,7 +22,8 @@ public class Util {
 	}
 
 	public static Long getLoggedInUserId() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 		if (principal instanceof JpaUserDetails) {
 			return ((JpaUserDetails) principal).getUserDbId();
 		}

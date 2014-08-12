@@ -31,7 +31,8 @@ public class JpaUserDetails implements UserDetails {
 		this.username = user.getUserName();
 		this.name = user.getName();
 
-		this.authorities = ImmutableSet.<GrantedAuthority> of(new SimpleGrantedAuthority(user.getAppGroup().getName()));
+		this.authorities = ImmutableSet.<GrantedAuthority> of(new SimpleGrantedAuthority(
+				user.getAppGroup().getName()));
 	}
 
 	@Override

@@ -30,29 +30,34 @@ public class ActorService extends BaseCRUDService<Actor> {
 	@ExtDirectMethod(STORE_READ)
 	@Transactional(readOnly = true)
 	public ExtDirectStoreResult<Actor> readActor(ExtDirectStoreReadRequest request,
-			@RequestParam(required = false) Long filmId, @RequestParam(required = false) Long id) {
+			@RequestParam(required = false) Long filmId,
+			@RequestParam(required = false) Long id) {
 		if (filmId != null) {
-			return new ExtDirectStoreResult<>(new JPAQuery(entityManager).from(QActor.actor)
+			return new ExtDirectStoreResult<>(new JPAQuery(entityManager)
+					.from(QActor.actor)
 					.innerJoin(QActor.actor.filmActor, QFilmActor.filmActor)
 					.where(QFilmActor.filmActor.film.id.eq(filmId)).list(QActor.actor));
-		} else if (id != null) {
+		}
+		else if (id != null) {
 			return new ExtDirectStoreResult<>(entityManager.find(Actor.class, id));
 		}
 
 		if (StringUtils.hasText(request.getQuery())) {
 			JPQLQuery query = new JPAQuery(entityManager).from(QActor.actor);
 			addPagingAndSorting(request, query, createPathBuilder());
-			query.where(QActor.actor.firstName.startsWithIgnoreCase(request.getQuery()).or(
-					QActor.actor.lastName.startsWithIgnoreCase(request.getQuery())));
+			query.where(QActor.actor.firstName.startsWithIgnoreCase(request.getQuery())
+					.or(QActor.actor.lastName.startsWithIgnoreCase(request.getQuery())));
 			SearchResults<Actor> searchResult = query.listResults(QActor.actor);
-			ExtDirectStoreResult<Actor> result = new ExtDirectStoreResult<>(searchResult.getTotal(),
-					searchResult.getResults());
+			ExtDirectStoreResult<Actor> result = new ExtDirectStoreResult<>(
+					searchResult.getTotal(), searchResult.getResults());
 
 			for (Actor actor : result.getRecords()) {
 
 				query = new JPAQuery(entityManager).from(QCategory.category);
-				query.innerJoin(QCategory.category.filmCategory, QFilmCategory.filmCategory);
-				query.innerJoin(QFilmCategory.filmCategory.film.filmActor, QFilmActor.filmActor);
+				query.innerJoin(QCategory.category.filmCategory,
+						QFilmCategory.filmCategory);
+				query.innerJoin(QFilmCategory.filmCategory.film.filmActor,
+						QFilmActor.filmActor);
 				query.where(QFilmActor.filmActor.actor.eq(actor));
 
 				StringBuilder sb = new StringBuilder(255);
@@ -62,10 +67,12 @@ public class ActorService extends BaseCRUDService<Actor> {
 
 					for (String title : new JPAQuery(entityManager)
 							.from(QFilm.film)
-							.innerJoin(QFilm.film.filmCategory, QFilmCategory.filmCategory)
+							.innerJoin(QFilm.film.filmCategory,
+									QFilmCategory.filmCategory)
 							.innerJoin(QFilm.film.filmActor, QFilmActor.filmActor)
 							.where(QFilmCategory.filmCategory.category.eq(category),
-									QFilmActor.filmActor.actor.eq(actor)).list(QFilm.film.title)) {
+									QFilmActor.filmActor.actor.eq(actor))
+							.list(QFilm.film.title)) {
 						sb.append(title);
 
 					}

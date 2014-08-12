@@ -22,9 +22,10 @@ public class JpaUserDetailsService implements UserDetailsService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = new JPAQuery(entityManager).from(QUser.user).where(QUser.user.userName.eq(username))
-				.singleResult(QUser.user);
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
+		User user = new JPAQuery(entityManager).from(QUser.user)
+				.where(QUser.user.userName.eq(username)).singleResult(QUser.user);
 		if (user != null) {
 			return new JpaUserDetails(user);
 		}

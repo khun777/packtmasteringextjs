@@ -17,15 +17,15 @@ public class GroupService extends BaseCRUDService<AppGroup> {
 	@Override
 	@Transactional
 	public ExtDirectStoreResult<AppGroup> destroy(Long id) {
-		new JPADeleteClause(entityManager, QPermission.permission).where(QPermission.permission.appGroup.id.eq(id))
-				.execute();
+		new JPADeleteClause(entityManager, QPermission.permission).where(
+				QPermission.permission.appGroup.id.eq(id)).execute();
 		return super.destroy(id);
 	}
 
 	@Override
 	protected void postModify(AppGroup entity) {
-		new JPADeleteClause(entityManager, QPermission.permission).where(QPermission.permission.appGroup.eq(entity))
-				.execute();
+		new JPADeleteClause(entityManager, QPermission.permission).where(
+				QPermission.permission.appGroup.eq(entity)).execute();
 
 		if (entity.getPermissions() != null) {
 			for (Long menuId : entity.getPermissions()) {

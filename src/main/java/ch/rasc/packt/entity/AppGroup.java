@@ -8,7 +8,10 @@ import ch.rasc.extclassgenerator.Model;
 import ch.rasc.extclassgenerator.ModelField;
 
 @Entity
-@Model(value = "Packt.model.security.Group", disablePagingParameters = true, paging = true, createMethod = "groupService.create", readMethod = "groupService.read", updateMethod = "groupService.update", destroyMethod = "groupService.destroy")
+@Model(value = "Packt.model.security.Group", disablePagingParameters = true,
+		paging = true, createMethod = "groupService.create",
+		readMethod = "groupService.read", updateMethod = "groupService.update",
+		destroyMethod = "groupService.destroy")
 public class AppGroup extends AbstractPersistable {
 	private String name;
 

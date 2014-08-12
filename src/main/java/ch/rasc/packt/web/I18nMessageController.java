@@ -36,17 +36,20 @@ public class I18nMessageController implements InitializingBean {
 		}
 	}
 
-	@RequestMapping(value = "/resources/i18n/v1/{language}.js", method = RequestMethod.GET)
-	public void i18n(HttpServletRequest request, HttpServletResponse response, @PathVariable String language)
-			throws IOException {
+	@RequestMapping(value = "/resources/i18n/v1/{language}.js",
+			method = RequestMethod.GET)
+	public void i18n(HttpServletRequest request, HttpServletResponse response,
+			@PathVariable String language) throws IOException {
 		Locale locale;
 		if ("de".equals(language)) {
 			locale = Locale.GERMAN;
-		} else {
+		}
+		else {
 			locale = Locale.ENGLISH;
 		}
 		byte[] output = buildResponse(locale);
-		ExtDirectSpringUtil.handleCacheableResponse(request, response, output, JS_CONTENT_TYPE);
+		ExtDirectSpringUtil.handleCacheableResponse(request, response, output,
+				JS_CONTENT_TYPE);
 	}
 
 	private byte[] buildResponse(Locale locale) {

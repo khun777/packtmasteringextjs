@@ -12,7 +12,10 @@ import ch.rasc.extclassgenerator.Model;
 import ch.rasc.extclassgenerator.ModelField;
 
 @Entity
-@Model(value = "Packt.model.staticData.City", disablePagingParameters = true, paging = true, createMethod = "cityService.create", readMethod = "cityService.read", updateMethod = "cityService.update", destroyMethod = "cityService.destroy")
+@Model(value = "Packt.model.staticData.City", disablePagingParameters = true,
+		paging = true, createMethod = "cityService.create",
+		readMethod = "cityService.read", updateMethod = "cityService.update",
+		destroyMethod = "cityService.destroy")
 public class City extends SakilaBaseEntity {
 
 	private String city;
@@ -55,7 +58,8 @@ public class City extends SakilaBaseEntity {
 	private void populate() {
 		if (country != null) {
 			countryId = country.getId();
-		} else {
+		}
+		else {
 			countryId = null;
 		}
 	}

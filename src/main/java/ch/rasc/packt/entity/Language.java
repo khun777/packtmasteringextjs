@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import ch.rasc.extclassgenerator.Model;
 
 @Entity
-@Model(value = "Packt.model.staticData.Language", disablePagingParameters = true, paging = true, createMethod = "languageService.create", readMethod = "languageService.read", updateMethod = "languageService.update", destroyMethod = "languageService.destroy")
+@Model(value = "Packt.model.staticData.Language", disablePagingParameters = true,
+		paging = true, createMethod = "languageService.create",
+		readMethod = "languageService.read", updateMethod = "languageService.update",
+		destroyMethod = "languageService.destroy")
 public class Language extends SakilaBaseEntity {
 
 	private String name;

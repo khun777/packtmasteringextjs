@@ -37,7 +37,8 @@ public class LoginService {
 	@ExtDirectMethod
 	public LoginStatus getStatus() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth != null && !auth.getName().equals("anonymousUser") && auth.isAuthenticated()) {
+		if (auth != null && !auth.getName().equals("anonymousUser")
+				&& auth.isAuthenticated()) {
 			return new LoginStatus(true, null);
 		}
 
@@ -51,15 +52,19 @@ public class LoginService {
 
 	// The session parameter is needed so that a session is created
 	@ExtDirectMethod
-	public LoginStatus login(@SuppressWarnings("unused") HttpSession session, String username, String password) {
+	public LoginStatus login(@SuppressWarnings("unused") HttpSession session,
+			String username, String password) {
 
-		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+				username, password);
 		UserDetails userDetail;
 		try {
 			userDetail = userDetailService.loadUserByUsername(username);
-		} catch (UsernameNotFoundException notFound) {
+		}
+		catch (UsernameNotFoundException notFound) {
 			return new LoginStatus(false, null);
-		} catch (Exception anotherProblem) {
+		}
+		catch (Exception anotherProblem) {
 			return new LoginStatus(false, null);
 		}
 
@@ -69,7 +74,8 @@ public class LoginService {
 			Authentication auth = authenticationManager.authenticate(token);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			return new LoginStatus(auth.isAuthenticated(), auth.getName());
-		} catch (AuthenticationException e) {
+		}
+		catch (AuthenticationException e) {
 			return new LoginStatus(false, null);
 		}
 	}
@@ -78,10 +84,12 @@ public class LoginService {
 	@PreAuthorize("isAuthenticated()")
 	@Transactional(readOnly = true)
 	public User getLoggedOnUser() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal();
 		if (principal instanceof JpaUserDetails) {
 
-			User user = entityManager.find(User.class, ((JpaUserDetails) principal).getUserDbId());
+			User user = entityManager.find(User.class,
+					((JpaUserDetails) principal).getUserDbId());
 			return user;
 
 		}

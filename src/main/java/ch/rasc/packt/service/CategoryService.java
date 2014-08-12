@@ -24,9 +24,12 @@ public class CategoryService extends BaseCRUDService<Category> {
 	public ExtDirectStoreResult<Category> readCategory(ExtDirectStoreReadRequest request,
 			@RequestParam(required = false) Long filmId) {
 		if (filmId != null) {
-			return new ExtDirectStoreResult<>(new JPAQuery(entityManager).from(QCategory.category)
-					.innerJoin(QCategory.category.filmCategory, QFilmCategory.filmCategory)
-					.where(QFilmCategory.filmCategory.film.id.eq(filmId)).list(QCategory.category));
+			return new ExtDirectStoreResult<>(new JPAQuery(entityManager)
+					.from(QCategory.category)
+					.innerJoin(QCategory.category.filmCategory,
+							QFilmCategory.filmCategory)
+					.where(QFilmCategory.filmCategory.film.id.eq(filmId))
+					.list(QCategory.category));
 		}
 
 		return super.read(request);
